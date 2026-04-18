@@ -790,6 +790,7 @@ body {
   cursor: pointer;
   font-size: 24px;
   border-radius: 10px;
+  color: black;
 }
 
 .card.flipped {
