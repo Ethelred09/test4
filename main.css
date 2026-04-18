@@ -795,6 +795,7 @@ body {
 
 .card.flipped {
   background: #f3d9a4;
+  color: black;
 }
 
 .memory-start-popup {
