@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Boutique</title>
+  <link rel="stylesheet" href="main.css">
+</head>
+<body>
+
+  <div class="test-topbar">
+    <div class="topbar-zone topbar-left">
+      <div class="logo-test" onclick="window.location.href='index.html'">Test</div>
+    </div>
+
+    <div class="topbar-zone topbar-center">
+      <nav class="test-menu">
+        <div class="test-tab" onclick="window.location.href='events.html'">Events</div>
+        <div class="test-tab" onclick="window.location.href='episode.html'">Épisodes</div>
+        <div class="test-tab" onclick="window.location.href='minijeux.html'">Mini-jeux</div>
+        <div class="test-tab" onclick="window.location.href='archives.html'">Archives</div>
+        <div class="test-tab active-tab" onclick="window.location.href='boutique.html'">Boutique</div>
+        <div class="test-tab" onclick="window.location.href='recharge.html'">Recharge</div>
+      </nav>
+    </div>
+
+    <div class="topbar-zone topbar-right">
+      <div class="profile-name-button" onclick="window.location.href='profil.html'">Audrey</div>
+      <div class="badge-ui" id="pa-display">PA : 0</div>
+      <div class="badge-ui" id="gold-display">Or : 0</div>
+    </div>
+  </div>
+
+  <div class="shop-container">
+
+    <h1>Boutiques</h1>
+
+    <div class="shop-grid">
+
+      <article class="shop-card" onclick="window.location.href='Boutiques/boutique-vetements.html'">
+        <h2 class="shop-card-title">Boutique de vêtements</h2>
+        <p class="shop-card-text">
+          Retrouve ici tous les vêtements disponibles à l'achat.
+        </p>
+      </article>
+
+      <article class="shop-card shop-card-locked" onclick="window.location.href='Boutiques/boutique-events.html'">
+        <span class="shop-badge">Fermée</span>
+        <h2 class="shop-card-title">Boutique d'events</h2>
+        <p class="shop-card-text">
+          Accessible uniquement pendant les events et certaines période spéciales.
+        </p>
+      </article>
+
+      <article class="shop-card" onclick="window.location.href='Boutiques/boutique-echange.html'">
+        <h2 class="shop-card-title">Boutique d'échange</h2>
+        <p class="shop-card-text">
+          Echange ici un item de ta garde-robe contre un autre item équivalent ou des PA.
+        </p>
+      </article>
+
+    </div>
+  </div>
+
+<script>
+function initializeCurrencies() {
+  if (localStorage.getItem("test_pa") === null) {
+    localStorage.setItem("test_pa", "250");
+  }
+
+  if (localStorage.getItem("test_gold") === null) {
+    localStorage.setItem("test_gold", "50");
+  }
+}
+
+function updateDisplays() {
+  const pa = Number(localStorage.getItem("test_pa")) || 0;
+  const gold = Number(localStorage.getItem("test_gold")) || 0;
+
+  const paDisplay = document.getElementById("pa-display");
+  const goldDisplay = document.getElementById("gold-display");
+
+  if (paDisplay) paDisplay.textContent = "PA : " + pa;
+  if (goldDisplay) goldDisplay.textContent = "Or : " + gold;
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+  initializeCurrencies(); // 🔥 essentiel
+  updateDisplays();
+});
+</script>
+
+</body>
+</html>

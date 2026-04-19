@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Épisodes</title>
+  <link rel="stylesheet" href="main.css">
+</head>
+
+<body>
+
+<!-- TOP BAR -->
+<div class="test-topbar">
+
+  <div class="topbar-zone topbar-left">
+    <div class="logo-test" onclick="window.location.href='index.html'">Test</div>
+  </div>
+
+  <div class="topbar-zone topbar-center">
+    <nav class="test-menu">
+      <div class="test-tab" onclick="window.location.href='events.html'">Events</div>
+      <div class="test-tab active-tab">Épisodes</div>
+      <div class="test-tab" onclick="window.location.href='minijeux.html'">Mini-jeux</div>
+      <div class="test-tab" onclick="window.location.href='archives.html'">Archives</div>
+      <div class="test-tab" onclick="window.location.href='boutique.html'">Boutique</div>
+      <div class="test-tab" onclick="window.location.href='recharge.html'">Recharge</div>
+    </nav>
+  </div>
+
+  <div class="topbar-zone topbar-right">
+    <div class="profile-name-button" onclick="window.location.href='profil.html'">Audrey</div>
+    <div class="badge-ui" id="pa-display">PA : 0</div>
+    <div class="badge-ui" id="gold-display">Or : 0</div>
+  </div>
+
+</div>
+
+<!-- CONTENU -->
+<div class="test-page">
+
+  <h1>Épisodes</h1>
+  <p class="episode-subtitle">Reprends ton aventure et découvre les prochains épisodes.</p>
+
+  <div class="episodes-grid">
+
+    <!-- EPISODE 1 -->
+    <div class="episode-card">
+      <div class="episode-card-header">
+        <h3>Épisode 1</h3>
+        <span class="episode-status" id="episode1-status-badge">Disponible</span>
+      </div>
+
+      <p>Le réveil de ton héroïne et sa découverte d’un nouveau monde.</p>
+
+      <div class="episode-meta">
+        <span id="episode1-meta-text"></span>
+      </div>
+
+      <div class="episode-button" id="episode1-main-button" onclick="launchEpisode1()">
+        Commencer
+      </div>
+    </div>
+
+    <!-- EPISODE 2 -->
+    <div class="episode-card">
+      <div class="episode-card-header">
+        <h3>Épisode 2</h3>
+        <span class="episode-status locked">Bientôt</span>
+      </div>
+
+      <p>De nouvelles rencontres et premiers choix importants.</p>
+
+      <div class="episode-meta">
+        <span>Disponible bientôt</span>
+      </div>
+
+      <div class="episode-button disabled">
+        Indisponible
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- SCRIPT -->
+<script>
+function initializeCurrencies() {
+  if (localStorage.getItem("test_pa") === null) {
+    localStorage.setItem("test_pa", "250");
+  }
+
+  if (localStorage.getItem("test_gold") === null) {
+    localStorage.setItem("test_gold", "50");
+  }
+}
+
+function updateDisplays() {
+  const pa = Number(localStorage.getItem("test_pa")) || 0;
+  const gold = Number(localStorage.getItem("test_gold")) || 0;
+
+  const paDisplay = document.getElementById("pa-display");
+  const goldDisplay = document.getElementById("gold-display");
+
+  if (paDisplay) paDisplay.textContent = "PA : " + pa;
+  if (goldDisplay) goldDisplay.textContent = "Or : " + gold;
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+  initializeCurrencies(); 
+  updateDisplays();
+});
+
+function updateEpisode1Card() {
+  const status = localStorage.getItem("episode1_status") || "not_started";
+
+  const badge = document.getElementById("episode1-status-badge");
+  const button = document.getElementById("episode1-main-button");
+  const meta = document.getElementById("episode1-meta-text");
+
+  if (!badge || !button || !meta) return;
+
+  badge.classList.remove("available", "locked", "in-progress", "completed");
+
+  if (status === "not_started") {
+    badge.textContent = "Disponible";
+    badge.classList.add("available");
+
+    button.textContent = "Commencer";
+    button.classList.remove("disabled");
+
+    meta.textContent = "Coût : 2 PA / dialogue";
+  }
+
+  if (status === "in_progress") {
+    badge.textContent = "En cours";
+    badge.classList.add("in-progress");
+
+    button.textContent = "Reprendre";
+    button.classList.remove("disabled");
+
+    meta.textContent = "Tu peux reprendre là où tu t’es arrêtée.";
+  }
+
+  if (status === "completed") {
+    badge.textContent = "Terminé";
+    badge.classList.add("completed");
+
+    button.textContent = "Replay";
+    button.classList.remove("disabled");
+
+    meta.textContent = "Épisode terminé. Tu peux le rejouer.";
+  }
+}
+
+function launchEpisode1() {
+  window.location.href = "Episodes/episode1.html";
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+  updateDisplays();
+  updateEpisode1Card();
+});
+</script>
+
+<style>
+    .episode-subtitle {
+  margin-bottom: 30px;
+  color: #ddd;
+}
+
+.episodes-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 25px;
+}
+
+.episode-card {
+  background: rgba(12, 18, 35, 0.85);
+  border-radius: 20px;
+  padding: 20px;
+  border: 1px solid rgba(231, 211, 161, 0.2);
+}
+
+.episode-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.episode-status {
+  padding: 5px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+}
+
+.available {
+  background: green;
+}
+
+.locked {
+  background: gray;
+}
+
+.episode-button {
+  margin-top: 15px;
+  padding: 10px;
+  border-radius: 10px;
+  background: gold;
+  cursor: pointer;
+  text-align: center;
+}
+
+.disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.episode-status.in-progress {
+  background: rgba(80, 150, 255, 0.16);
+  border: 1px solid rgba(80, 150, 255, 0.5);
+  color: #bfd8ff;
+}
+
+.episode-status.completed {
+  background: rgba(120, 210, 150, 0.16);
+  border: 1px solid rgba(120, 210, 150, 0.5);
+  color: #c8f5d4;
+}
+</style>
+</body>
+</html>

@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recharge</title>
+  <link rel="stylesheet" href="main.css">
+</head>
+<body>
+
+  <div class="test-topbar">
+    <div class="topbar-zone topbar-left">
+      <div class="logo-test" onclick="window.location.href='index.html'">Test</div>
+    </div>
+
+    <div class="topbar-zone topbar-center">
+      <nav class="test-menu">
+        <div class="test-tab" onclick="window.location.href='events.html'">Events</div>
+        <div class="test-tab" onclick="window.location.href='episode.html'">Épisodes</div>
+        <div class="test-tab" onclick="window.location.href='minijeux.html'">Mini-jeux</div>
+        <div class="test-tab" onclick="window.location.href='archives.html'">Archives</div>
+        <div class="test-tab" onclick="window.location.href='boutique.html'">Boutique</div>
+        <div class="test-tab active-tab" onclick="window.location.href='recharge.html'">Recharge</div>
+      </nav>
+    </div>
+
+    <div class="topbar-zone topbar-right">
+      <div class="profile-name-button" onclick="window.location.href='profil.html'">Audrey</div>
+      <div class="badge-ui" id="pa-display">PA : 0</div>
+      <div class="badge-ui" id="gold-display">Or : 0</div>
+    </div>
+  </div>
+
+  <div class="recharge-page">
+    <h1 class="recharge-title">Recharge</h1>
+    
+    <div class="recharge-sections">
+
+      <div class="recharge-column">
+        <section class="recharge-section">
+         <h2 class="recharge-subtitle">Packs de PA</h2>
+         <div class="recharge-grid">
+           <article class="recharge-card" onclick="buyPack('PA', 500, '0,50 €')">
+             <h3>500</h3>
+             <p>0,50 €</p>
+           </article>
+
+           <article class="recharge-card" onclick="buyPack('PA', 1000, '1,99 €')">
+             <h3>1000</h3>
+             <p>1,99 €</p>
+           </article>
+
+           <article class="recharge-card" onclick="buyPack('PA', 2500, '3,99 €')">
+             <h3>2500</h3>
+             <p>3,99€</p>
+           </article>
+
+           <article class="recharge-card" onclick="buyPack('PA', 5000, '6,99 €')">
+             <h3>5000</h3>
+             <p>6,99 €</p>
+           </article>
+
+           <article class="recharge-card" onclick="buyPack('PA', 10000, '12,99 €')">
+             <h3>10000</h3>
+             <p>12,99 €</p>
+           </article>
+
+           <article class="recharge-card" onclick="buyPack('PA', 20000, '24,99 €')">
+             <h3>20000</h3>
+             <p>24,99 €</p>
+           </article>
+          </div>
+       </section>
+      </div>
+
+      <div class="recharge-column">
+        <section class="recharge-section">
+         <h2 class="recharge-subtitle">Packs d'Or</h2>
+         <div class="recharge-grid">
+           <article class="recharge-card" onclick="buyPack('Or', 500, '0,50 €')">
+             <h3>500</h3>
+             <p>0,50 €</p>
+           </article>
+
+           <article class="recharge-card" onclick="buyPack('Or', 1000, '1,99 €')">
+             <h3>1000</h3>
+             <p>1,99 €</p>
+           </article>
+
+           <article class="recharge-card" onclick="buyPack('Or', 2500, '3,99 €')">
+             <h3>2500</h3>
+             <p>3,99€</p>
+           </article>
+
+           <article class="recharge-card" onclick="buyPack('Or', 5000, '6,99 €')">
+             <h3>5000</h3>
+             <p>6,99 €</p>
+           </article>
+
+           <article class="recharge-card" onclick="buyPack('Or', 10000, '12,99 €')">
+             <h3>10000</h3>
+             <p>12,99 €</p>
+           </article>
+
+           <article class="recharge-card" onclick="buyPack('Or', 20000, '24,99 €')">
+             <h3>20000</h3>
+             <p>24,99 €</p>
+           </article>
+         </div>
+        </section> 
+      </div>
+
+      <div class="recharge-column">
+        <section class="monthly-pack-section">
+          <h2 class="recharge-subtitle">Pack du mois</h2>
+          <article class="monthly-pack-card" onclick="buyMonthlyPack()">
+           <h3>Pack du mois</h3>
+           <p>Contenu exclusif du mois</p>
+           <p>PA + Or + tenue exclusive</p>
+           <span class="monthly-pack-price">9,99 €</span>
+          </article>
+        </section>
+     </div>
+    </div>
+  </div>
+     
+
+<script>
+function initializeCurrencies() {
+  if (localStorage.getItem("test_pa") === null) {
+    localStorage.setItem("test_pa", "250");
+  }
+
+  if (localStorage.getItem("test_gold") === null) {
+    localStorage.setItem("test_gold", "50");
+  }
+}
+
+function updateDisplays() {
+  const pa = Number(localStorage.getItem("test_pa")) || 0;
+  const gold = Number(localStorage.getItem("test_gold")) || 0;
+
+  const paDisplay = document.getElementById("pa-display");
+  const goldDisplay = document.getElementById("gold-display");
+
+  if (paDisplay) paDisplay.textContent = "PA : " + pa;
+  if (goldDisplay) goldDisplay.textContent = "Or : " + gold;
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+  initializeCurrencies(); // 🔥 essentiel
+  updateDisplays();
+});
+
+function choosePaymentMethod() {
+  const method = prompt(
+    "Choisis ton mode de paiement :\n- CB\n- Téléphone\n- Paypal"
+  );
+
+  if (
+    normalized === "cb" ||
+    normalized === "carte" ||
+    normalized === "carte bancaire" ||
+    normalized === "téléphone" ||
+    normalized === "telephone" ||
+    normalized === "paypal" 
+  ) {
+    return method;
+  }
+  alert("Mode de paiment invalide.");
+  return null;
+}
+
+function buyPack(type, amount, price) {
+  const confirmBuy = confirm(
+    "Veux-tu acheter ce pack" + amount + " " + type + " pour " + price + " ? "
+  );
+
+  if (!confirmBuy) return;
+
+  const choosePaymentMethod = choosePaymentMethod();
+  if (!paymentMethod) return;
+
+  if (type === "PA") {
+    const currentPA = Number(localStorage.getItem("test_pa")) || 0;
+    localStorage.setItem("test_pa", currentPA + amounr);
+  } else if (type === "Or") {
+    const currentGold = Number(localStorage.getItem(test_gold)) || 0;
+    localStorage.setItem(test_gold, currentGold + amount);
+  }
+
+  updateDisplays();
+  alert("Achat validé via" + paymentMethod + "!");
+}
+
+function buyMonthlyPack() {
+  const confirmBuy = confirm(
+    "Veux-tu acheter le pack du mois pour 9,99 € ?"
+  );
+
+  if (!confirmBuy) return;
+
+  const paymentMethod = choosePaymentMethod();
+  if (!paymentMethod) return;
+
+  const currentPA = Number(localStorage.getItem("test_pa")) || 0;
+  const currentGold = Number(localStorage.getItem("test_gold")) || 0;
+
+  localStorage.setItem("test_pa", currentPA + 1500);
+  localStorage.setItem("test_gold", currentGold + 1500);
+
+  updateDisplays();
+  alert("Pack du mois acheté via" + paymentMethod + " !");
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+  initializeCurrencies();
+  updateDisplays();
+});
+</script>
+
+</body>
+</html>

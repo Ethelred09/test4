@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Épisode 1</title>
+  <link rel="stylesheet" href="main.css">
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+    }
+
+    #episode-screen {
+      position: fixed;
+      inset: 0;
+      background: url("../images/test.jpg") center center / cover no-repeat;
+    }
+
+    #episode-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.25);
+      pointer-events: none;
+    }
+
+    #dialogue-box {
+      position: absolute;
+      left: 50%;
+      bottom: 30px;
+      transform: translateX(-50%);
+      width: min(1000px, calc(100% - 40px));
+      min-height: 150px;
+      background: rgba(10, 14, 30, 0.88);
+      border: 1px solid rgba(231, 211, 161, 0.25);
+      border-radius: 24px;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
+      padding: 24px 28px;
+      box-sizing: border-box;
+      color: #f3f0e8;
+      cursor: pointer;
+      z-index: 10;
+    }
+
+    #speaker-name {
+      color: #e7d3a1;
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    #dialogue-text {
+      font-size: 22px;
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    #continue-indicator {
+      position: absolute;
+      right: 24px;
+      bottom: 18px;
+      font-size: 14px;
+      color: rgba(243, 240, 232, 0.7);
+    }
+
+    #back-button {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      z-index: 20;
+      background: rgba(10, 14, 30, 0.88);
+      border: 1px solid rgba(231, 211, 161, 0.25);
+      color: #f3f0e8;
+      border-radius: 999px;
+      padding: 12px 18px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    #back-button:hover {
+      border-color: rgba(231, 211, 161, 0.55);
+    }
+
+    #currency-bar {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        z-index: 20;
+        display: flex;
+        gap: 12px;
+    }
+
+    #currency-badge {
+        background: rgba(10, 14, 30, 0.88);
+        border: 1px solid rgba(231, 211, 161, 0.25);
+        color: #f3f0e8;
+        border-radius: 999px;
+        padding: 12px 16px;
+        font-size: 16px;
+        font-weight: 600;
+    }
+  </style>
+</head>
+
+
+<body>
+
+  <div id="episode-screen">
+    <div id="episode-overlay"></div>
+
+    <audio id="bg-music" src="../musique/paix-sanctuaire.mp3"loop></audio>
+
+    <button id="back-button" onclick="window.location.href='../episode.html'">
+      Retour
+    </button>
+
+    <div id="currency-bar">
+        <div class="currency-badge" id="episode-pa-display">PA : 0</div>
+        <div class="currency-badge" id="episode-gold-display">Or : 0</div>
+    </div>
+
+    <div id="dialogue-box" onclick="nextDialogue()">
+      <div id="speaker-name"></div>
+      <p id="dialogue-text"></p>
+      <div id="continue-indicator">cliquer pour continuer</div>
+    </div>
+  </div>
+
+  <script>
+   const episode1Dialogues = [
+    { speaker: "", text: "..." },
+    { speaker: "Héroïne", text: "Je… où suis-je ?" },
+    { speaker: "Héroïne", text: "Le sol est froid sous mes doigts." },
+    { speaker: "Héroïne", text: "Une lumière dorée éclaire faiblement la pièce." },
+    { speaker: "Héroïne", text: "Quelqu’un approche…" }
+  ];
+
+  const DIALOGUE_COST = 2;
+  let currentDialogueIndex = 0;
+
+  function updateEpisodeCurrencyDisplay() {
+    const pa = Number(localStorage.getItem("test_pa")) || 0;
+    const gold = Number(localStorage.getItem("test_gold")) || 0;
+
+    const paDisplay = document.getElementById("episode-pa-display");
+    const goldDisplay = document.getElementById("episode-gold-display");
+
+    if (paDisplay) paDisplay.textContent = "PA : " + pa;
+    if (goldDisplay) goldDisplay.textContent = "Or : " + gold;
+  }
+
+  function showDialogue() {
+    const current = episode1Dialogues[currentDialogueIndex];
+    document.getElementById("speaker-name").textContent = current.speaker;
+    document.getElementById("dialogue-text").textContent = current.text;
+  }
+
+  function saveEpisode1Progress() {
+    localStorage.setItem("episode1_status", "in_progress");
+    localStorage.setItem("episode1_index", String(currentDialogueIndex));
+  }
+
+  function completeEpisode1() {
+    localStorage.setItem("episode1_status", "completed");
+    localStorage.setItem("episode1_index", "0");
+  }
+
+  function nextDialogue() {
+    const currentPa = Number(localStorage.getItem("test_pa")) || 0;
+
+    if (currentPa < DIALOGUE_COST) {
+      alert("Tu n’as pas assez de PA pour continuer l’histoire.");
+      return;
+    }
+
+    const newPa = currentPa - DIALOGUE_COST;
+    localStorage.setItem("test_pa", String(newPa));
+    updateEpisodeCurrencyDisplay();
+
+    currentDialogueIndex++;
+
+    if (currentDialogueIndex < episode1Dialogues.length) {
+      saveEpisode1Progress();
+      showDialogue();
+    } else {
+      completeEpisode1();
+      window.location.href = "episode.html";
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", function () {
+    const savedStatus = localStorage.getItem("episode1_status") || "not_started";
+    const savedIndex = Number(localStorage.getItem("episode1_index")) || 0;
+
+    if (savedStatus === "in_progress") {
+      currentDialogueIndex = savedIndex;
+    } else {
+      currentDialogueIndex = 0;
+      localStorage.setItem("episode1_status", "in_progress");
+      localStorage.setItem("episode1_index", "0");
+    }
+
+    showDialogue();
+    updateEpisodeCurrencyDisplay();
+  });
+  </script>
+
+</body>
+</html>

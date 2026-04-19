@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Test</title>
+  <link rel="stylesheet" href="main.css">
+</head>
+<body>
+
+  <div class="test-topbar">
+    <div class="topbar-zone topbar-left">
+      <div class="logo-test" id="home-logo">Test</div>
+    </div>
+
+    <div class="topbar-zone topbar-center">
+      <nav class="test-menu">
+        <div class="test-tab" onclick="window.location.href='events.html'">Events</div>
+        <div class="test-tab" onclick="window.location.href='episode.html'">Épisodes</div>
+        <div class="test-tab" onclick="window.location.href='minijeux.html'">Mini-Jeux</div>
+        <div class="test-tab" onclick="window.location.href='archives.html'">Archives</div>
+        <div class="test-tab" onclick="window.location.href='boutique.html'">Boutiques</div>
+        <div class="test-tab" onclick="window.location.href='recharge.html'">Recharge</div>
+      </nav>
+    </div>
+
+    <div class="topbar-zone topbar-right">
+      <div class="profile-name-button" onclick="window.location.href='profil.html'">Audrey</div>
+      <div class="badge-ui" id="pa-display">PA : 0</div>
+      <div class="badge-ui" id="gold-display">Or : 0</div>
+      
+    </div>
+  </div>
+
+  <div id="reward-message" class="reward-message" style="display: none;"></div>
+
+  <div class="test-page">
+   <section id="home" class="test-section active">
+   <div class="home-layout">
+
+    <div class="home-left-card">
+      <h2 class="home-section-title">Héroïne</h2>
+      <div class="hero-display">
+        <img src="images/dora.png" alt="Héroïne" class="hero-image">
+      </div>
+    </div>
+
+    <div class="home-center-grid">
+      <div class="home-feature-card" onclick="window.location.href='episode.html'">
+        <span class="feature-title">Épisodes</span>
+        <span class="feature-text">Reprendre ou commencer un épisode</span>
+      </div>
+
+      <div class="home-feature-card" onclick="window.location.href='minijeux.html'">
+        <span class="feature-title">Mini-jeux</span>
+        <span class="feature-text">Voir les parties restantes</span>
+      </div>
+
+      <div class="home-feature-card" onclick="window.location.href='dressing.html'">
+        <span class="feature-title">Dressing</span>
+        <span class="feature-text">Tenues et accessoires</span>
+      </div>
+
+      <div class="home-feature-card" onclick="window.location.href='predictions.html'">
+        <span class="feature-title">Prédictions</span>
+        <span class="feature-text">Carte bonus après 10 jours</span>
+      </div>
+
+      <div class="home-feature-card" onclick="window.location.href='pack.html'">
+        <span class="feature-title">Pack du mois</span>
+        <span class="feature-text">Découvre le pack du mois</span>
+      </div>
+
+      <div class="home-feature-card" onclick="window.location.href='actualite.html'">
+        <span class="feature-title">Actualités</span>
+        <span class="feature-text">Découvre ici toutes les actualités liées au jeu</span>
+      </div>
+    </div>
+
+    <div class="home-right-column">
+      <div class="home-side-card">
+        <h2 class="home-section-title">Calendrier</h2>
+        <div id="calendar-grid" class="calendar-grid"></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+   
+
+   </div>
+
+</section>
+
+    <section id="events" class="test-section">
+      <h1>Events</h1>
+    </section>
+
+    <section id="mini-jeux" class="test-section">
+      <h1>Mini-jeux</h1>
+    </section>
+
+    <section id="archives" class="test-section">
+      <h1>Archives</h1>
+      <p>Consulte le lore, les personnages, les provinces et les informations débloquées.</p>
+
+      <div class="test-card-grid">
+        <div class="test-card">
+          <h3>Personnages</h3>
+          <p>Découvre les fiches des personnages rencontrés.</p>
+        </div>
+
+        <div class="test-card">
+          <h3>Provinces</h3>
+          <p>Explore les régions, peuples et lieux importants.</p>
+        </div>
+
+        <div class="test-card">
+          <h3>Bestiaire</h3>
+          <p>Retrouve les créatures et espèces du monde.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="recharge" class="test-section">
+      <h1>Recharge</h1>
+      <p>Récupère tes ressources quotidiennes et suis ta progression.</p>
+
+      <div class="test-card-grid">
+        <div class="test-card">
+          <h3>Connexion du jour</h3>
+          <p>Chaque nouveau jour : +50 PA et +25 Or.</p>
+        </div>
+
+        <div class="test-card">
+          <h3>PA actuels</h3>
+          <p id="recharge-pa-display">PA : 0</p>
+        </div>
+
+        <div class="test-card">
+          <h3>Or actuel</h3>
+          <p id="recharge-gold-display">Or : 0</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="boutique" class="test-section">
+      <h1>Boutique</h1>
+      <p>Achète des objets, tenues et accessoires pour personnaliser ton aventure.</p>
+
+      <div class="test-card-grid">
+        <div class="test-card">
+          <h3>Tenue lunaire</h3>
+          <p>Prix : 120 Or</p>
+        </div>
+
+        <div class="test-card">
+          <h3>Parure dorée</h3>
+          <p>Prix : 80 Or</p>
+        </div>
+
+        <div class="test-card">
+          <h3>Fond mystique</h3>
+          <p>Prix : 150 Or</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="profil" class="test-section">
+         <h1>Profil</h1>
+    </section>
+
+  </div>
+
+  <script>
+    const REWARD_PA = 50;
+  const REWARD_GOLD = 25;
+
+  const dailyRewards = [
+    { day: 1, reward: "+50 PA" },
+    { day: 2, reward: "+25 Or" },
+    { day: 3, reward: "+50 PA" },
+    { day: 4, reward: "+25 Or" },
+    { day: 5, reward: "+75 PA" },
+    { day: 6, reward: "+30 Or" },
+    { day: 7, reward: "+50 PA" },
+    { day: 8, reward: "+25 Or" },
+    { day: 9, reward: "+50 PA" },
+    { day: 10, reward: "Carte bonus" },
+    { day: 11, reward: "+60 PA" },
+    { day: 12, reward: "+25 Or" },
+    { day: 13, reward: "+50 PA" },
+    { day: 14, reward: "+35 Or" },
+    { day: 15, reward: "+80 PA" },
+    { day: 16, reward: "+25 Or" },
+    { day: 17, reward: "+50 PA" },
+    { day: 18, reward: "+25 Or" },
+    { day: 19, reward: "+60 PA" },
+    { day: 20, reward: "Carte bonus" },
+    { day: 21, reward: "+50 PA" },
+    { day: 22, reward: "+25 Or" },
+    { day: 23, reward: "+70 PA" },
+    { day: 24, reward: "+30 Or" },
+    { day: 25, reward: "+50 PA" },
+    { day: 26, reward: "+25 Or" },
+    { day: 27, reward: "+75 PA" },
+    { day: 28, reward: "+40 Or" },
+    { day: 29, reward: "+100 PA" },
+    { day: 30, reward: "Grande récompense" }
+  ];
+
+  function getTodayDateString() {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, "0");
+    const day = String(today.getDate()).padStart(2, "0");
+    return year + "-" + month + "-" + day;
+  }
+
+  
+function initializeCurrencies() {
+  if (localStorage.getItem("test_pa") === null) {
+    localStorage.setItem("test_pa", "250");
+  }
+
+  if (localStorage.getItem("test_gold") === null) {
+    localStorage.setItem("test_gold", "50");
+  }
+}
+
+function updateDisplays() {
+  const pa = Number(localStorage.getItem("test_pa")) || 0;
+  const gold = Number(localStorage.getItem("test_gold")) || 0;
+
+  const paDisplay = document.getElementById("pa-display");
+  const goldDisplay = document.getElementById("gold-display");
+
+  if (paDisplay) paDisplay.textContent = "PA : " + pa;
+  if (goldDisplay) goldDisplay.textContent = "Or : " + gold;
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+  initializeCurrencies(); // 🔥 essentiel
+  updateDisplays();
+});
+
+  function giveDailyRewardIfNeeded() {
+    let pa = Number(localStorage.getItem("test_pa")) || 0;
+    let gold = Number(localStorage.getItem("test_gold")) || 0;
+
+    const lastRewardDate = localStorage.getItem("test_last_reward_date");
+    const today = getTodayDateString();
+
+    if (lastRewardDate !== today) {
+      pa += REWARD_PA;
+      gold += REWARD_GOLD;
+
+      localStorage.setItem("test_pa", pa);
+      localStorage.setItem("test_gold", gold);
+      localStorage.setItem("test_last_reward_date", today);
+
+      let loginDay = Number(localStorage.getItem("test_login_day")) || 0;
+      if (loginDay < 30) {
+        loginDay += 1;
+      }
+      localStorage.setItem("test_login_day", loginDay);
+    }
+  }
+
+  function renderCalendar() {
+    const calendarGrid = document.getElementById("calendar-grid");
+    if (!calendarGrid) return;
+
+    calendarGrid.innerHTML = "";
+    const claimedDay = Number(localStorage.getItem("test_login_day")) || 0;
+
+    dailyRewards.forEach(function (item) {
+      const dayBox = document.createElement("div");
+      dayBox.classList.add("day");
+
+      if (item.day <= claimedDay) dayBox.classList.add("claimed");
+      if (item.day === claimedDay) dayBox.classList.add("today");
+      if (item.day === 10 || item.day === 20 || item.day === 30) dayBox.classList.add("special");
+
+      dayBox.innerHTML = `
+        <span class="day-number">${item.day}</span>
+        <span class="day-reward">${item.reward}</span>
+      `;
+
+      calendarGrid.appendChild(dayBox);
+    });
+  }
+
+  function openSection(targetId) {
+    const sections = document.querySelectorAll(".test-section");
+    const tabs = document.querySelectorAll(".test-tab");
+    const profilButton = document.getElementById("profil-button");
+
+    sections.forEach(function (section) {
+      section.classList.remove("active");
+    });
+
+    tabs.forEach(function (tab) {
+      tab.classList.remove("active-tab");
+    });
+
+    if (profilButton) {
+      profilButton.classList.remove("active-tab");
+    }
+
+    const targetSection = document.getElementById(targetId);
+    if (targetSection) {
+      targetSection.classList.add("active");
+    }
+
+    const targetTab = document.querySelector('.test-tab[data-target="' + targetId + '"]');
+    if (targetTab) {
+      targetTab.classList.add("active-tab");
+    }
+
+    if (profilButton && targetId === "profil") {
+      profilButton.classList.add("active-tab");
+    }
+  }
+
+  function setupTabs() {
+    const tabs = document.querySelectorAll(".test-tab");
+
+    tabs.forEach(function (tab) {
+      tab.addEventListener("click", function () {
+        const targetId = tab.getAttribute("data-target");
+        openSection(targetId);
+      });
+    });
+
+    const homeLogo = document.getElementById("home-logo");
+    if (homeLogo) {
+      homeLogo.addEventListener("click", function () {
+        openSection("home");
+      });
+    }
+
+    const profilButton = document.getElementById("profil-button");
+    if (profilButton) {
+      profilButton.addEventListener("click", function () {
+        openSection("profil");
+      });
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", function () {
+    giveDailyRewardIfNeeded();
+    updateDisplays();
+    renderCalendar();
+    setupTabs();
+  });
+  </script>
+
+</body>
+</html>
